@@ -1,0 +1,11 @@
+/.gradle/
+*.class
+/build/
+
+#intelij
+*.iml
+*.log
+.idea
+/build/
+.yml
+/out/
