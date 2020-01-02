@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/api")
@@ -21,7 +19,7 @@ public class RestApplication {
 
     @GetMapping(value = "/recent_purchases/{userName}")
     @Cacheable(value = "reservationsCache", key = "#userName")
-    public Mono<List<RecentPurchaseResponse>> get2(@PathVariable String userName) {
+    public Flux<RecentPurchaseResponse> get2(@PathVariable String userName) {
         return purchaseService.findRecentlyPurchase(userName);
     }
 

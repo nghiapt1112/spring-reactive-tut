@@ -10,15 +10,12 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static com.example.demo.model.PurchaseResponse.throwIfEmpty;
 
 @Service
 public class PurchaseService extends BaseService {
 
-    public Mono<List<RecentPurchaseResponse>> findRecentlyPurchase(String userName) {
+    public Flux<RecentPurchaseResponse> findRecentlyPurchase(String userName) {
         System.out.println("\n\nCalling to API: " + "-findRecentlyPurchase-" + "\n\n");
         return getRecentPurchasesByUser(userName)
                 .flatMap(purchaseResponse ->
@@ -29,11 +26,13 @@ public class PurchaseService extends BaseService {
                                         .collectList(),
                                 (product, responseFlux) -> new RecentPurchaseResponse(product, responseFlux))
                 )
-                .collectList()
-                .map(val ->
-                        val.parallelStream()
-                                .sorted((o1, o2) -> o2.getRecent().size() - o1.getRecent().size())
-                                .collect(Collectors.toList())
+//                .collectList()
+                .flatMap(val ->
+                        Flux.just(val).sort((o1, o2) -> o2.getRecent().size() - o1.getRecent().size())
+
+//                        val.parallelStream()
+//                                .sorted((o1, o2) -> o2.getRecent().size() - o1.getRecent().size())
+//                                .collect(Collectors.toList())
                 );
     }
 
