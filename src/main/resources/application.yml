@@ -1,0 +1,9 @@
+#Master configuration
+server.port: 8080
+#app.external.host: http://localhost:8000
+#  curl -v  -X GET "https://api.flightstats.com/flex/alerts/rest/v1/json/create/AA/100/to/LHR/arriving/2020/01/20?appId=76e3cc5f&appKey=2a9e6f95fa525f42c03049cd6b25d111&type=JSON&deliverTo=http%3A%2F%2Fyour.post.url"
+#app.external.host: https://api.flightstats.com/flex/alerts/rest/v1/json/create/AA/100/to/LHR/arriving/2020/01/20?appId=76e3cc5f&appKey=2a9e6f95fa525f42c03049cd6b25d111&type=JSON&deliverTo=http%3A%2F%2Fyour.post.url
+app.external.host: https://www.google.com/
+#app.external.host: https://api.flightstats.com/flex/alerts/rest
+#flightstats.create.rule_by_arrival: /v1/json/create/{carrier}/{flightNumber}/to/{arrivalAirport}/arriving/{year}/{month}/{day}
+flightstats.create.rule_by_arrival: /v1/json/create/{carrier}/100/to/LHR/arriving/2020/01/20?appId=76e3cc5f&appKey=2a9e6f95fa525f42c03049cd6b25d111&type=JSON&deliverTo=http%3A%2F%2Fyour.post.url
